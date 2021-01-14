@@ -9,11 +9,11 @@ resource "aws_db_instance" "notejam_db" {
   engine_version            = "8.0.20"
   name                      = "notejam_db"
   username                  = "admin"
-  password                  = "12121212"
+  password                  = "Password123"
   parameter_group_name      = "default.mysql8.0"
   option_group_name         = "default:mysql-8-0"
   vpc_security_group_ids    = [aws_security_group.database_sg.id]
   publicly_accessible       = false
   skip_final_snapshot       = true
-  // final_snapshot_identifier = "notejam-db-snapshot-${time_static.timestamp.unix}"
+//  final_snapshot_identifier = "notejam-db-snapshot-${time_static.timestamp.unix}"
 }

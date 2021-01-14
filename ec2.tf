@@ -16,6 +16,7 @@ resource "aws_instance" "notejam_webserver" {
   associate_public_ip_address = true
   iam_instance_profile        = aws_iam_instance_profile.rds_full_access.name
   key_name                    = aws_key_pair.key_pair.key_name
+  user_data                   = file("user_data.sh")
 
   tags = {
     Name = "Notejam-WebServer"

@@ -3,3 +3,7 @@ variable "external_ip" {
   default = "0.0.0.0/0"
 }
 
+variable "domain_name" {
+  type    = string
+  default = "cmcloudlab908.info."
+}
