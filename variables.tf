@@ -5,5 +5,5 @@ variable "external_ip" {
 
 variable "domain_name" {
   type    = string
-  default = "cmcloudlab908.info."
+  default = "cmcloudlab1769.info."
 }
