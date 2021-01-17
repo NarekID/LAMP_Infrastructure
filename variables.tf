@@ -1,6 +1,6 @@
 variable "domain_name" {
   type    = string
-  default = "cmcloudlab631.info."
+  default = "cmcloudlab1687.info."
 }
 
 variable "webserver_port" {

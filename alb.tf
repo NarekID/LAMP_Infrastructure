@@ -2,11 +2,8 @@ resource "aws_lb" "notejam_alb" {
   name               = "notejam-application-lb"
   load_balancer_type = "application"
   internal           = false
-  subnets = [
-    aws_default_subnet.subnet1.id,
-    aws_default_subnet.subnet2.id
-  ]
-  security_groups = [aws_security_group.lb_sg.id]
+  subnets            = aws_subnet.public_subnet.*.id
+  security_groups    = [aws_security_group.lb_sg.id]
 
 }
 
@@ -15,13 +12,14 @@ resource "aws_lb_target_group" "notejam_alb_tg" {
   port        = var.webserver_port
   protocol    = "HTTP"
   target_type = "instance"
-  vpc_id      = aws_default_vpc.default_vpc.id
+  vpc_id      = aws_vpc.webapp_vpc.id
   health_check {
     enabled  = true
     protocol = "HTTP"
     path     = "/"
     port     = var.webserver_port
     interval = 10
+    matcher  = "300-399"
   }
 }
 

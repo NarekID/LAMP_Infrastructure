@@ -1,6 +1,7 @@
 resource "aws_security_group" "lb_sg" {
   name        = "Application-LB-SG"
   description = "Application-LB-SG"
+  vpc_id      = aws_vpc.webapp_vpc.id
 
   ingress {
     from_port   = var.webserver_port
@@ -19,6 +20,7 @@ resource "aws_security_group" "lb_sg" {
 resource "aws_security_group" "webserver_sg" {
   name        = "WebServer-SG"
   description = "WebServer-SG"
+  vpc_id      = aws_vpc.webapp_vpc.id
 
   ingress {
     from_port   = 22
@@ -43,6 +45,7 @@ resource "aws_security_group" "webserver_sg" {
 resource "aws_security_group" "database_sg" {
   name        = "Database-SG"
   description = "Database-SG"
+  vpc_id      = aws_vpc.webapp_vpc.id
 
   ingress {
     from_port       = 3306

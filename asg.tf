@@ -18,6 +18,7 @@ resource "aws_launch_template" "notejam_lt" {
   vpc_security_group_ids = [aws_security_group.webserver_sg.id]
   ebs_optimized          = true
   user_data              = filebase64("user_data.sh")
+
   iam_instance_profile {
     name = aws_iam_instance_profile.rds_full_access.name
   }
@@ -55,10 +56,7 @@ resource "aws_autoscaling_group" "notejam_asg" {
     version = "$Latest"
   }
 
-  vpc_zone_identifier = [
-    aws_default_subnet.subnet1.id,
-    aws_default_subnet.subnet2.id
-  ]
+  vpc_zone_identifier = aws_subnet.private_subnet.*.id
 
   depends_on = [aws_db_instance.notejam_db, aws_lb.notejam_alb]
 }

@@ -112,7 +112,7 @@ resource "aws_route_table_association" "private_rt_assoc" {
   subnet_id      = element(aws_subnet.private_subnet.*.id, count.index)
 }
 
-resource "aws_default_route_table" "private_rt_assoc" {
+resource "aws_default_route_table" "default_rt" {
   default_route_table_id = aws_vpc.webapp_vpc.default_route_table_id
 
   tags = {
