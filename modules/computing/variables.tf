@@ -37,3 +37,27 @@ variable "lb_sg_id" {
 variable "webserver_sg_id" {
   type = string
 }
+
+variable "ami_name_regex" {
+  type = string
+}
+
+variable "lt_name" {
+  type = string
+}
+
+variable "alb_name" {
+  type = string
+}
+
+variable "tg_name" {
+  type = string
+}
+
+variable "asg_name" {
+  type = string
+}
+
+variable "kp_name" {
+  type = string
+}

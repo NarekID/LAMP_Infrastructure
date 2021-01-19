@@ -3,7 +3,7 @@ resource "aws_db_subnet_group" "db_subnet_group" {
 }
 
 resource "aws_db_instance" "database" {
-  identifier             = "notejam-database"
+  identifier             = var.db_identifier
   instance_class         = "db.t2.micro"
   allocated_storage      = 20
   storage_type           = "gp2"

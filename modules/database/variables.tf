@@ -21,3 +21,7 @@ variable "db_admin_user" {
 variable "db_admin_password" {
   type = string
 }
+
+variable "db_identifier" {
+  type = string
+}

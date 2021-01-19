@@ -1,5 +1,5 @@
 resource "aws_lb" "app_lb" {
-  name               = "application-lb"
+  name               = var.alb_name
   load_balancer_type = "application"
   internal           = false
   subnets            = var.public_subnets
@@ -7,7 +7,7 @@ resource "aws_lb" "app_lb" {
 }
 
 resource "aws_lb_target_group" "alb_tg" {
-  name        = "target-group"
+  name        = var.tg_name
   port        = var.webserver_port
   protocol    = "HTTP"
   target_type = "instance"
@@ -35,18 +35,18 @@ resource "aws_lb_listener" "alb_listener" {
 
 data "aws_ami" "latest_ami" {
   owners      = ["self"]
-  name_regex  = "ubuntu20-notejam-*"
+  name_regex  = var.ami_name_regex
   most_recent = true
 }
 
 resource "aws_key_pair" "key_pair" {
-  key_name   = "lab-key1"
+  key_name   = var.kp_name
   public_key = var.public_key
 }
 
 resource "aws_launch_template" "lt" {
-  name                   = "Launch-template"
-  description            = "Launch template"
+  name                   = var.lt_name
+  description            = var.lt_name
   instance_type          = "t3.micro"
   image_id               = data.aws_ami.latest_ami.id
   key_name               = aws_key_pair.key_pair.key_name
@@ -77,7 +77,7 @@ resource "aws_launch_template" "lt" {
 }
 
 resource "aws_autoscaling_group" "asg" {
-  name              = "notejam-autoscaling-group"
+  name              = var.asg_name
   health_check_type = "ELB"
   target_group_arns = [aws_lb_target_group.alb_tg.arn]
   max_size          = 2
